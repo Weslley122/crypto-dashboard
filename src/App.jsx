@@ -111,17 +111,6 @@ const App = () => {
                 <li><span>Em circulação</span><strong>{coin.circulating_supply} {coin.symbol.toUpperCase()}</strong></li>
               </ul>
             </aside>
-            <aside className="coin-details">
-              <p className="subtitle2">Informações detalhadas sobre {coin.name}</p>
-              <ul>
-                <li><span>Ranking de mercado</span><strong>#{coin.market_cap_rank}</strong></li>
-                <li><span>Máxima de 24h</span><strong>${coin.high_24h}</strong></li>
-                <li><span>Mínima de 24h</span><strong>${coin.low_24h}</strong></li>
-                <li><span>Volume de 24h</span><strong>${coin.total_volume}</strong></li>
-                <li><span>Máxima histórica</span><strong>${coin.ath}</strong></li>
-                <li><span>Em circulação</span><strong>{coin.circulating_supply} {coin.symbol.toUpperCase()}</strong></li>
-              </ul>
-            </aside>
           </div>
         ))}
 

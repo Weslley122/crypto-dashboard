@@ -199,7 +199,7 @@ h1 {
 .coin-info {
   flex: 1 1 340px;
   display: grid;
-  grid-template-columns: 1fr auto;
+  grid-template-columns: auto 1fr;
   align-content: start;
   column-gap: 16px;
   row-gap: 18px;
@@ -275,6 +275,7 @@ h1 {
   grid-row: 1 / span 4;
   position: relative;
   align-self: center;
+  justify-self: center;
   perspective: 800px;
   padding: 0 12px;
 }
@@ -311,8 +312,7 @@ h1 {
   background: rgba(0, 0, 0, 0.55);
 }
 
-.subtitle1,
-.subtitle2 {
+.subtitle1 {
   margin-bottom: 12px;
   padding-bottom: 12px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
