@@ -1,25 +1,24 @@
 /* ==========================================================
-   Variáveis (cores, fontes, bordas)
+   Variáveis (cores, fontes)
    ========================================================== */
 :root {
-  --bg: #000;
-  --text: #9a9a9a;
-  --text-h: #f3f3f3;
-  --border: rgba(255, 255, 255, 0.12);
-  --border-strong: rgba(255, 255, 255, 0.3);
-  --card: linear-gradient(180deg, #111 0%, #090909 50%, #040404 100%);
-  --up: #34d399;
-  --down: #f87171;
+  --bg: #0a0a0b;
+  --surface: #111113;
+  --surface-2: #17171a;
+  --line: #232327;
+  --line-strong: #34343a;
+  --text: #8b8b93;
+  --text-h: #ededef;
+  --up: #3fb950;
+  --down: #f0605d;
 
-  /* Cor de destaque padrão (r, g, b) — cada moeda troca a sua lá embaixo */
-  --coin: 200, 210, 230;
+  /* Cor de destaque de cada moeda (r, g, b) — usada no marcador ao lado do símbolo */
+  --coin: 140, 140, 150;
 
   --sans: 'Inter', system-ui, 'Segoe UI', Roboto, sans-serif;
   --serif: 'Instrument Serif', Georgia, serif;
-  --mono: 'JetBrains Mono', ui-monospace, Consolas, monospace;
 
-  font: 16px/1.5 var(--sans);
-  letter-spacing: -0.01em;
+  font: 15px/1.5 var(--sans);
   color-scheme: dark;
   color: var(--text);
   background: var(--bg);
@@ -27,11 +26,10 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Cor de cada moeda (usada no brilho e nos detalhes do card) */
 .coin-bitcoin     { --coin: 247, 147, 26; }
 .coin-ethereum    { --coin: 130, 150, 255; }
 .coin-binancecoin { --coin: 243, 186, 47; }
-.coin-ripple      { --coin: 220, 225, 235; }
+.coin-ripple      { --coin: 200, 205, 215; }
 .coin-usd-coin    { --coin: 70, 150, 240; }
 
 /* ==========================================================
@@ -44,24 +42,7 @@
 body {
   margin: 0;
   min-height: 100vh;
-  background:
-    radial-gradient(ellipse 70% 45% at 50% -5%, rgba(120, 160, 255, 0.16), transparent 70%),
-    var(--bg);
-}
-
-/* Grade de fundo estilo "blockchain", sumindo nas bordas */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
-  background-size: 56px 56px;
-  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 30%, transparent 80%);
-  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 30%, transparent 80%);
+  background: var(--bg);
 }
 
 #root {
@@ -78,68 +59,57 @@ p {
 }
 
 /* ==========================================================
-   Topo (hero)
+   Cabeçalho
    ========================================================== */
 .hero {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  padding: 96px 0 72px;
-}
-
-.badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 24px;
-  padding: 6px 14px;
-  border-radius: 5px;
-  border: 1px solid var(--border);
-  background: linear-gradient(90deg, #5a5a5a, #1f1f1f 45%, #0a0a0a);
-  color: var(--text-h);
-  font: 500 11px var(--mono);
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-}
-
-.live-dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--up);
-  box-shadow: 0 0 8px var(--up);
-  animation: pulse 1.6s ease-in-out infinite;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 16px;
+  padding: 56px 0 28px;
+  margin-bottom: 32px;
+  border-bottom: 1px solid var(--line);
 }
 
 h1 {
-  font-size: 56px;
-  font-weight: 500;
-  line-height: 1.1;
-  letter-spacing: -0.035em;
-  color: #fff;
+  font-family: var(--serif);
+  font-size: 52px;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  color: var(--text-h);
 }
 
 .serif {
-  font-family: var(--serif);
   font-style: italic;
-  font-weight: 400;
-  font-size: 1.12em;
-  color: #d4d4d4;
+  color: #b4b4bb;
 }
 
 .subtitle {
-  max-width: 480px;
-  margin-top: 18px;
-  font-size: 16px;
-  line-height: 1.6;
+  max-width: 460px;
+  margin-top: 12px;
+  font-size: 15px;
   color: var(--text);
+}
+
+.hero-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+}
+
+.hero-meta span {
+  color: var(--text-h);
 }
 
 /* Mensagens de carregando / erro */
 .status {
-  text-align: center;
-  font: 13px var(--mono);
+  font-size: 14px;
   color: var(--text);
 }
 
@@ -151,104 +121,95 @@ h1 {
    Card de cada moeda
    ========================================================== */
 .coin-section {
-  position: relative;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  margin-bottom: 28px;
-  padding: 28px;
-  border-radius: 12px;
-  border: 1px solid var(--border);
-  background: var(--card);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  margin-bottom: 16px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--surface);
   overflow: hidden;
-  transition: border-color 0.3s, box-shadow 0.3s;
-}
-
-/* Linha de luz no topo do card, na cor da moeda */
-.coin-section::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 10%;
-  right: 10%;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(var(--coin), 0.8), transparent);
-}
-
-/* Reflexo que atravessa o card ao passar o mouse */
-.coin-section::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: linear-gradient(100deg, transparent 30%, rgba(255, 255, 255, 0.05) 50%, transparent 70%);
-  transform: translateX(-100%);
-  transition: transform 0.9s ease;
+  transition: border-color 0.2s;
 }
 
 .coin-section:hover {
-  border-color: rgba(var(--coin), 0.45);
-  box-shadow: 0 0 40px rgba(var(--coin), 0.08);
+  border-color: var(--line-strong);
 }
 
-.coin-section:hover::after {
-  transform: translateX(100%);
-}
-
-/* Lado esquerdo: textos + moeda girando */
+/* Lado esquerdo: nome, números e moeda girando */
 .coin-info {
-  flex: 1 1 340px;
   display: grid;
-  grid-template-columns: auto 1fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto;
   align-content: start;
-  column-gap: 16px;
-  row-gap: 18px;
+  column-gap: 32px;
+  row-gap: 20px;
+  padding: 28px;
 }
 
 .coin-info h2 {
-  grid-column: 1;
+  grid-column: 1 / 3;
   display: flex;
   align-items: center;
-  gap: 10px;
-  font-size: 24px;
-  font-weight: 500;
-  letter-spacing: -0.02em;
-  color: #fff;
-}
-
-.tag {
-  padding: 3px 8px;
-  border-radius: 4px;
-  border: 1px solid var(--border);
-  background: rgba(255, 255, 255, 0.08);
-  font: 500 11px var(--mono);
-  letter-spacing: 0.08em;
+  gap: 12px;
+  font-family: var(--serif);
+  font-size: 30px;
+  font-weight: 400;
+  line-height: 1.1;
   color: var(--text-h);
 }
 
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 8px;
+  border: 1px solid var(--line-strong);
+  border-radius: 4px;
+  font: 500 11px var(--sans);
+  letter-spacing: 0.04em;
+  color: var(--text);
+}
+
+/* Marcador na cor da moeda */
+.tag::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgb(var(--coin));
+}
+
 .coin-info p {
-  grid-column: 1;
-  font: 11px var(--mono);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
+  font-size: 13px;
   color: var(--text);
 }
 
 .coin-info .value {
   display: block;
   margin-top: 4px;
-  font: 500 18px var(--mono);
-  text-transform: none;
-  letter-spacing: -0.02em;
+  font-size: 20px;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
   color: var(--text-h);
-  word-break: break-all;
 }
 
-/* Preço atual em destaque */
-.coin-info p:first-of-type .value {
-  font-size: 30px;
-  font-weight: 700;
-  color: #fff;
+/* Preço atual: linha inteira e número maior */
+.coin-info p:nth-of-type(1) {
+  grid-column: 1 / 3;
+}
+
+.coin-info p:nth-of-type(1) .value {
+  font-size: 36px;
+  letter-spacing: -0.02em;
+}
+
+/* Variação e capitalização lado a lado */
+.coin-info p:nth-of-type(2) {
+  grid-column: 1;
+}
+
+.coin-info p:nth-of-type(3) {
+  grid-column: 2;
 }
 
 .up {
@@ -257,7 +218,8 @@ h1 {
 
 .up::before {
   content: "▲ ";
-  font-size: 0.7em;
+  font-size: 0.6em;
+  vertical-align: 0.2em;
 }
 
 .down {
@@ -266,87 +228,264 @@ h1 {
 
 .down::before {
   content: "▼ ";
-  font-size: 0.7em;
+  font-size: 0.6em;
+  vertical-align: 0.2em;
 }
 
-/* Moeda girando */
-.coin-wrapper {
-  grid-column: 2;
+/* Painel da moeda: grade de fundo, moeda girando e mini gráfico */
+.coin-tile {
+  grid-column: 3;
   grid-row: 1 / span 4;
-  position: relative;
   align-self: center;
-  justify-self: center;
-  perspective: 800px;
-  padding: 0 12px;
+  justify-self: end;
+  position: relative;
+  isolation: isolate;
+  width: 208px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  /* Luz suave na cor da moeda, centrada no ponteiro (fica fora da tela sem o mouse) */
+  background:
+    radial-gradient(14rem circle at var(--spot-x, -100rem) var(--spot-y, -100rem), rgba(var(--coin), 0.08), transparent 60%),
+    var(--bg);
+  transition: border-color 0.2s;
 }
 
-/* "Sombra" de luz embaixo da moeda */
-.coin-wrapper::after {
+.coin-tile:hover {
+  border-color: rgba(var(--coin), 0.45);
+}
+
+/* Grade de quadradinhos, apagada nas bordas pela máscara */
+.coin-grid {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  display: grid;
+  grid-template-columns: repeat(8, 26px);
+  grid-auto-rows: 26px;
+  background-image:
+    linear-gradient(to right, var(--line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--line) 1px, transparent 1px);
+  background-size: 26px 26px;
+  -webkit-mask-image: radial-gradient(at 50% 35%, #000 25%, transparent 75%);
+  mask-image: radial-gradient(at 50% 35%, #000 25%, transparent 75%);
+}
+
+/* Cópia da grade na cor da moeda, visível só num círculo em volta do ponteiro */
+.coin-grid::after {
   content: "";
   position: absolute;
-  left: 50%;
-  bottom: -18px;
-  width: 110px;
-  height: 14px;
-  transform: translateX(-50%);
+  inset: 0;
+  background-image:
+    linear-gradient(to right, rgba(var(--coin), 0.7) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(var(--coin), 0.7) 1px, transparent 1px);
+  background-size: 26px 26px;
+  -webkit-mask-image: radial-gradient(7rem circle at var(--spot-x, -100rem) var(--spot-y, -100rem), #000, transparent 70%);
+  mask-image: radial-gradient(7rem circle at var(--spot-x, -100rem) var(--spot-y, -100rem), #000, transparent 70%);
+}
+
+.coin-grid span {
+  animation: cell-flash 7.2s linear var(--cell-delay) infinite;
+}
+
+/* Moeda girando, com brilho e reflexo na cor dela */
+.coin-stage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  height: 140px;
+  perspective: 800px;
+}
+
+/* Halo atrás da moeda */
+.coin-stage::before {
+  content: "";
+  position: absolute;
+  width: 130px;
+  height: 130px;
   border-radius: 50%;
-  background: radial-gradient(rgba(var(--coin), 0.45), transparent 70%);
-  filter: blur(4px);
+  background: radial-gradient(circle, rgba(var(--coin), 0.35), transparent 65%);
+  animation: glow-pulse 3s ease-in-out infinite;
+}
+
+/* Reflexo de luz embaixo */
+.coin-stage::after {
+  content: "";
+  position: absolute;
+  bottom: 12px;
+  width: 72px;
+  height: 8px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(var(--coin), 0.45), transparent 70%);
+  filter: blur(2px);
 }
 
 .coin-spin {
+  position: relative;
   display: block;
-  width: 130px;
-  height: 130px;
-  animation: coin-spin 3s linear infinite;
-  filter: drop-shadow(0 0 22px rgba(var(--coin), 0.55));
+  width: 88px;
+  height: 88px;
+  filter: drop-shadow(0 0 18px rgba(var(--coin), 0.55));
+  animation: coin-spin 6s linear infinite;
+  transition: filter 0.3s;
 }
 
-/* Lado direito: cards de detalhes */
+.coin-tile:hover .coin-spin {
+  filter: drop-shadow(0 0 26px rgba(var(--coin), 0.75));
+}
+
+/* Mini gráfico de 7 dias */
+.spark {
+  position: relative;
+  padding: 0 14px 14px;
+}
+
+.spark-head {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 6px;
+  font-size: 11px;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text);
+}
+
+.spark-chart {
+  position: relative;
+  height: 40px;
+  color: rgb(var(--coin));
+  /* Linha tracejada no lugar do gráfico enquanto ele está escondido */
+  background: linear-gradient(to right, var(--line-strong) 50%, transparent 50%) bottom / 6px 1px repeat-x;
+}
+
+.spark-chart svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  /* Escondido: o recorte cobre 100% da largura */
+  clip-path: inset(0 100% 0 0);
+}
+
+.spark-area {
+  opacity: 0;
+}
+
+.spark-dot {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgb(var(--coin));
+  transform: translate(-50%, -50%) scale(0);
+}
+
+/* Anel que pulsa em volta do ponto, como um sinal "ao vivo" */
+.spark-dot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: rgb(var(--coin));
+}
+
+/* Mouse em cima: a linha se desenha da esquerda para a direita, depois entram a área e o ponto */
+.coin-tile:hover .spark-chart svg {
+  animation: chart-wipe 1.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.coin-tile:hover .spark-area {
+  animation: fade-in 0.8s 0.7s forwards;
+}
+
+.coin-tile:hover .spark-dot {
+  animation: dot-in 0.3s 1.2s forwards;
+}
+
+.coin-tile:hover .spark-dot::after {
+  animation: ping 1.4s 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+/* Telas de toque não têm hover: o gráfico já aparece pronto */
+@media (hover: none) {
+  .spark-chart svg {
+    clip-path: none;
+  }
+
+  .spark-area {
+    opacity: 1;
+  }
+
+  .spark-dot {
+    transform: translate(-50%, -50%);
+  }
+}
+
+/* Botão "Saiba mais" */
+.btn-saiba-mais {
+  grid-column: 1 / 3;
+  justify-self: start;
+  height: 36px;
+  padding: 0 14px;
+  border: 1px solid var(--line-strong);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--text-h);
+  font: 500 13px var(--sans);
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.btn-saiba-mais::after {
+  content: "→";
+  display: inline-block;
+  margin-left: 6px;
+  transition: transform 0.2s;
+}
+
+.btn-saiba-mais:hover {
+  background: var(--surface-2);
+  border-color: #4a4a52;
+}
+
+.btn-saiba-mais:hover::after {
+  transform: translateX(3px);
+}
+
+/* Lado direito: detalhes em formato de tabela */
 .coin-details {
-  flex: 1 1 260px;
-  max-width: 300px;
-  padding: 18px;
-  border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background: rgba(0, 0, 0, 0.55);
+  padding: 28px 24px;
+  border-left: 1px solid var(--line);
+  background: var(--surface-2);
 }
 
 .subtitle1 {
-  margin-bottom: 12px;
-  padding-bottom: 12px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  font: 500 10.5px var(--mono);
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: var(--text);
+  margin-bottom: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-h);
 }
 
 .coin-details ul {
   list-style: none;
   margin: 0;
   padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
 }
 
 .coin-details li {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: baseline;
   gap: 12px;
-  padding: 8px 10px;
-  border-radius: 5px;
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  background: rgba(255, 255, 255, 0.02);
-  font-size: 12.5px;
-  transition: border-color 0.2s, background 0.2s;
+  padding: 11px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 13px;
 }
 
-.coin-details li:hover {
-  border-color: rgba(var(--coin), 0.35);
-  background: rgba(var(--coin), 0.05);
+.coin-details li:last-child {
+  border-bottom: none;
 }
 
 .coin-details li span {
@@ -354,48 +493,10 @@ h1 {
 }
 
 .coin-details li strong {
-  font: 500 12px var(--mono);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
   color: var(--text-h);
   text-align: right;
-  overflow-wrap: anywhere;
-}
-
-/* ==========================================================
-   Botão "Saiba mais"
-   ========================================================== */
-.btn-saiba-mais {
-  grid-column: 1;
-  justify-self: start;
-  position: relative;
-  overflow: hidden;
-  height: 38px;
-  padding: 0 16px;
-  border-radius: 6px;
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.5), rgba(255, 255, 255, 0.05));
-  color: #fff;
-  font: 500 13px var(--sans);
-  cursor: pointer;
-  transition: border-color 0.3s, box-shadow 0.3s;
-}
-
-/* Brilho que passa pelo botão */
-.btn-saiba-mais::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-  transform: translateX(-130%);
-  transition: transform 0.7s;
-}
-
-.btn-saiba-mais:hover {
-  border-color: rgba(var(--coin), 0.7);
-  box-shadow: 0 0 18px rgba(var(--coin), 0.25);
-}
-
-.btn-saiba-mais:hover::after {
-  transform: translateX(130%);
 }
 
 /* ==========================================================
@@ -409,34 +510,20 @@ h1 {
   align-items: center;
   justify-content: center;
   padding: 24px;
-  background: rgba(0, 0, 0, 0.75);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  animation: fade-in 0.2s ease;
+  background: rgba(0, 0, 0, 0.65);
+  animation: fade-in 0.15s ease;
 }
 
 .modal {
-  position: relative;
   width: 100%;
-  max-width: 640px;
+  max-width: 600px;
   max-height: 85vh;
   overflow-y: auto;
-  border-radius: 12px;
-  border: 1px solid rgba(var(--coin), 0.35);
-  background: var(--card);
-  box-shadow: 0 0 60px rgba(var(--coin), 0.12), 0 25px 50px rgba(0, 0, 0, 0.6);
-  animation: modal-in 0.25s ease;
-}
-
-/* Mesma linha de luz do topo dos cards */
-.modal::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 10%;
-  right: 10%;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(var(--coin), 0.8), transparent);
+  border: 1px solid var(--line-strong);
+  border-radius: 10px;
+  background: var(--surface);
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.5);
+  animation: modal-in 0.18s ease;
 }
 
 .modal-header {
@@ -444,72 +531,52 @@ h1 {
   align-items: center;
   gap: 14px;
   padding: 20px 24px;
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid var(--line);
 }
 
 .modal-header img {
-  width: 40px;
-  height: 40px;
-  filter: drop-shadow(0 0 12px rgba(var(--coin), 0.5));
+  width: 32px;
+  height: 32px;
 }
 
 .modal-header h2 {
   flex: 1;
   display: flex;
   align-items: center;
-  gap: 10px;
-  font-size: 22px;
-  font-weight: 500;
-  color: #fff;
+  gap: 12px;
+  font-family: var(--serif);
+  font-size: 26px;
+  font-weight: 400;
+  color: var(--text-h);
 }
 
 .modal-close {
-  width: 34px;
-  height: 34px;
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--line-strong);
   border-radius: 6px;
-  border: 1px solid var(--border);
-  background: rgba(255, 255, 255, 0.05);
-  color: var(--text-h);
-  font-size: 14px;
+  background: transparent;
+  color: var(--text);
+  font-size: 13px;
   cursor: pointer;
-  transition: border-color 0.2s, background 0.2s;
+  transition: background 0.2s, color 0.2s;
 }
 
 .modal-close:hover {
-  border-color: var(--border-strong);
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--surface-2);
+  color: var(--text-h);
 }
 
 .modal-body {
   min-height: 160px;
   padding: 24px;
-  color: var(--text);
   line-height: 1.7;
+  color: var(--text);
 }
 
 /* ==========================================================
    Animações
    ========================================================== */
-@keyframes fade-in {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes modal-in {
-  from {
-    opacity: 0;
-    transform: translateY(16px) scale(0.98);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
 @keyframes coin-spin {
   from {
     transform: rotateY(0deg);
@@ -519,51 +586,153 @@ h1 {
   }
 }
 
-@keyframes pulse {
-  0%, 100% {
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
     opacity: 1;
   }
+}
+
+@keyframes glow-pulse {
+  0%,
+  100% {
+    opacity: 0.6;
+    transform: scale(0.92);
+  }
   50% {
-    opacity: 0.35;
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes cell-flash {
+  0%,
+  9%,
+  100% {
+    background-color: transparent;
+  }
+  3% {
+    background-color: rgba(var(--coin), 0.12);
+  }
+}
+
+@keyframes chart-wipe {
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes dot-in {
+  to {
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+@keyframes ping {
+  75%,
+  100% {
+    opacity: 0;
+    transform: scale(3);
+  }
+}
+
+/* Quem pede menos movimento vê o gráfico aparecer sem a animação de desenho */
+@media (prefers-reduced-motion: reduce) {
+  .coin-tile:hover .spark-chart svg,
+  .coin-tile:hover .spark-area,
+  .coin-tile:hover .spark-dot {
+    animation-duration: 0.01s;
+    animation-delay: 0s;
+  }
+
+  .coin-spin,
+  .coin-stage::before,
+  .coin-grid span {
+    animation: none;
+  }
+}
+
+@keyframes modal-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
 /* ==========================================================
    Telas menores
    ========================================================== */
-@media (max-width: 1024px) {
-  h1 {
-    font-size: 40px;
+@media (max-width: 860px) {
+  .coin-section {
+    grid-template-columns: 1fr;
   }
 
   .coin-details {
-    max-width: none;
+    border-left: none;
+    border-top: 1px solid var(--line);
   }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 560px) {
   #root {
     padding: 0 16px 48px;
   }
 
   .hero {
-    padding: 64px 0 48px;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-top: 40px;
+  }
+
+  .hero-meta {
+    align-items: flex-start;
   }
 
   h1 {
-    font-size: 32px;
+    font-size: 40px;
   }
 
-  .coin-section {
+  .coin-info {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     padding: 20px;
   }
 
-  .coin-spin {
-    width: 90px;
-    height: 90px;
+  .coin-info h2 {
+    grid-column: 1 / -1;
+    font-size: 26px;
   }
 
-  .coin-wrapper::after {
-    width: 76px;
+  .coin-tile {
+    grid-column: 1 / -1;
+    grid-row: auto;
+    justify-self: stretch;
+    width: auto;
+  }
+
+  .coin-grid {
+    grid-template-columns: repeat(auto-fill, 26px);
+  }
+
+  .coin-stage {
+    height: 112px;
+  }
+
+  .coin-spin {
+    width: 64px;
+    height: 64px;
+  }
+
+  .coin-info p:nth-of-type(1) .value {
+    font-size: 30px;
+  }
+
+  .btn-saiba-mais {
+    grid-column: 1 / -1;
   }
 }
